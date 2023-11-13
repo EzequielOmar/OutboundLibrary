@@ -1,0 +1,17 @@
+{
+  "name": "outbound-lib",
+  "version": "1.0.0",
+  "description": "Library to handle outbound requests.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest ./test/*.test.js"
+  },
+  "author": "EzequielOmar",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
