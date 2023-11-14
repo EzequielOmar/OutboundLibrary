@@ -2,28 +2,28 @@ const { URL } = require('url');
 const querystring = require('querystring');
 const makeRequest = require('./httpRequest');
 
-function post(url, data, type = 'urlencoded', headers = {}) {
-  const options = new URL(url);
+function postRequest(url, config, data) {
+  const reqUrl = new URL(url);
   let postData;
 
-  if (type === 'urlencoded') {
+  if (config.type === 'urlencoded') {
     postData = querystring.stringify(data);
-    options.headers = {
+    reqUrl.headers = {
       'Content-Type': 'application/x-www-form-urlencoded',
-      ...headers,
+      ...config.headers,
     };
-  } else if (type === 'json') {
+  } else if (config.type === 'json') {
     postData = JSON.stringify(data);
-    options.headers = {
+    reqUrl.headers = {
       'Content-Type': 'application/json; charset=UTF-8',
-      ...headers,
+      ...config.headers,
     };
   }
 
-  options.method = 'POST';
-  options.headers['Content-Length'] = Buffer.byteLength(postData);
-
-  return makeRequest(options, postData);
+  reqUrl.method = 'POST';
+  reqUrl.headers['Content-Length'] = Buffer.byteLength(postData);
+  
+  return makeRequest(reqUrl, config, postData);
 }
 
-module.exports = post;
+module.exports = postRequest;

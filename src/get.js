@@ -2,13 +2,13 @@ const { URL } = require('url');
 const querystring = require('querystring');
 const makeRequest = require('./httpRequest');
 
-function get(url, data) {
-  const options = new URL(url);
+function getRequest(url, config, data = {}) {
+  const reqUrl = new URL(url);
   if (data) {
     const query = querystring.stringify(data);
-    options.search = query;
+    reqUrl.search = query;
   }
-  return makeRequest(options, null);
+  return makeRequest(reqUrl, config, null);
 }
 
-module.exports = get;
+module.exports = getRequest;

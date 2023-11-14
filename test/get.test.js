@@ -1,8 +1,14 @@
-const outbound_lib = require('../src/index');
+const OB = require('../src/index');
 
-xdescribe('GET request', () => {
+let client;
+
+beforeEach(() => {
+  client = new OB();
+});
+
+describe('Outbound Library > GET request', () => {
   test('GET > With search params', async () => {
-    const response = await outbound_lib.get('http://jsonplaceholder.typicode.com/posts', { userId: 6 });
+    const response = await client.get('http://jsonplaceholder.typicode.com/posts', { userId: 6 });
     expect(response).toBeDefined();
   });
 });
