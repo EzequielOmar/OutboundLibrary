@@ -5,7 +5,9 @@ class OB {
     constructor() {
         this.defaults = {
             timeout: 5000,
-            type: 'urlencoded'
+            type: 'urlencoded',
+            resType: 'json',
+            headers: {}
         };
     }
 
