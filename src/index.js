@@ -2,12 +2,12 @@ const getRequest = require('./get');
 const postRequest = require('./post');
 
 class OB {
-    constructor() {
+    constructor(config = {}) {
         this.defaults = {
-            timeout: 5000,
-            type: 'urlencoded',
-            resType: 'json',
-            headers: {}
+            timeout: config.timeout || 5000,
+            type: config.type || 'urlencoded', //* Can be: 'json'
+            resType: config.resType || 'json', //* Can be: 'plain'
+            headers: config.headers || {}
         };
     }
 
