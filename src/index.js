@@ -1,5 +1,5 @@
-const getRequest = require('./get');
-const postRequest = require('./post');
+const getRequest = require('./methods/get');
+const postRequest = require('./methods/post');
 
 class OB {
     constructor(config = {}) {

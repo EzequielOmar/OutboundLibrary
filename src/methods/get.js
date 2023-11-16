@@ -1,6 +1,6 @@
 const { URL } = require('url');
 const querystring = require('querystring');
-const makeRequest = require('./httpRequest');
+const makeRequest = require('../parsers/parseRequest');
 
 function getRequest(url, config, data = {}) {
   const reqUrl = new URL(url);

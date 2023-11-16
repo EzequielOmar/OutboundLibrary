@@ -1,32 +1,16 @@
 const http = require('http');
 const https = require('https');
-const Errors = require('./errors');
+const Errors = require('../constants/errors');
+const makeResponse = require('./parseResponse');
 
 
 function makeRequest(url, config, postData) {
   return new Promise((resolve, reject) => {
     const protocol = url.protocol === 'https:' ? https : http;
-
-    const req = protocol.request(url, (res) => {
-      if(res.statusCode === 500) {
-        reject({...Errors.InternalServerError, ...{url: url.href}})
-      }
-      
-      let data = '';
-      res.on('data', (chunk) => {
-        data += chunk;
-      });
-
-      res.on('end', () => {
-        let resData;
-        if (data) {
-          resData = config.resType === 'plain' ? data : JSON.parse(data ?? '');
-        }
-        resolve({ status: res.statusCode, data: resData, dataSize: Buffer.byteLength(data) });
-      });
-    });
+    const req = protocol.request(url, (res) => makeResponse(res, url, config, resolve, reject));
 
     req.method = url.method ?? 'GET';
+
     Object.entries(url.headers || {}).forEach(([key, value]) => {
       req.setHeader(key, value);
     });

@@ -1,11 +1,8 @@
 const { URL } = require('url');
 const querystring = require('querystring');
-const makeRequest = require('./httpRequest');
+const makeRequest = require('../parsers/parseRequest');
 
-function postRequest(url, config, data) {
-  const reqUrl = new URL(url);
-  reqUrl.method = 'POST';
-  
+function handleContentType(reqUrl, config, data) {
   let postData;
   if (config.type === 'urlencoded') {
     postData = querystring.stringify(data);
@@ -14,8 +11,14 @@ function postRequest(url, config, data) {
     postData = JSON.stringify(data);
     reqUrl.headers = {...config.headers, ...{ 'Content-Type': 'application/json; charset=UTF-8' }};
   }
+  return postData;
+}
+
+function postRequest(url, config, data) {
+  const reqUrl = new URL(url);
+  reqUrl.method = 'POST';
+  const postData = handleContentType(reqUrl, config, data);
   reqUrl.headers['Content-Length'] = Buffer.byteLength(postData);
-  
   return makeRequest(reqUrl, config, postData);
 }
 
