@@ -1,4 +1,10 @@
 const Errors = {
+	MissingField: {
+		code: 'MissingField', status: 400, message: 'Client data is missing required data fields.'
+	},
+	MissingFile: {
+		code: 'MissingFile', status: 400, message: 'Client provided invalid or missing data file.'
+	},
 	ENOTFOUND: {
 		code: 'ENOTFOUND', status: 404, message: 'The requested URL or resource was not found.'
 	},  

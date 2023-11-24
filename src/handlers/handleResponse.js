@@ -1,7 +1,7 @@
 const Errors = require('../constants/errors');
 
 
-function makeResponse(res, url, config, resolve, reject) {
+function handleResponse(res, url, config, resolve, reject) {
   if(res.statusCode === 500) {
     reject({...Errors.InternalServerError, ...{url: url.href}})
   }
@@ -20,4 +20,4 @@ function makeResponse(res, url, config, resolve, reject) {
   });
 }
 
-module.exports = makeResponse;
+module.exports = handleResponse;

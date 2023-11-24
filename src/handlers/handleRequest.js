@@ -1,13 +1,13 @@
 const http = require('http');
 const https = require('https');
 const Errors = require('../constants/errors');
-const makeResponse = require('./parseResponse');
+const handleResponse = require('./handleResponse');
 
 
-function makeRequest(url, config, postData) {
+function handleRequest(url, config, postData) {
   return new Promise((resolve, reject) => {
     const protocol = url.protocol === 'https:' ? https : http;
-    const req = protocol.request(url, (res) => makeResponse(res, url, config, resolve, reject));
+    const req = protocol.request(url, (res) => handleResponse(res, url, config, resolve, reject));
 
     req.method = url.method ?? 'GET';
 
@@ -23,13 +23,13 @@ function makeRequest(url, config, postData) {
       if(error.code === 'ENOTFOUND') reject({...Errors.ENOTFOUND, ...{ url: url.href }})
       reject(error);
     });
-
+    
     if (postData) {
       req.write(postData);
     }
-
+    
     req.end();
   });
 }
 
-module.exports = makeRequest;
+module.exports = handleRequest;
