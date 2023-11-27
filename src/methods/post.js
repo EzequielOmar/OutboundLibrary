@@ -1,14 +1,15 @@
-const { URL } = require('url');
-const querystring = require('querystring');
-const handleRequest = require('../handlers/handleRequest');
-const Errors = require('../constants/errors');
+const { URL, URLSearchParams } = require('url');
 const FormData = require('form-data');
 const fs = require('fs');
 const path = require('path');
 
+const handleRequest = require('../handlers/handleRequest');
+const Errors = require('../constants/errors');
+
+
 function handleUrlEncoded(reqUrl, config, data) {
   reqUrl.headers = {...config.headers, ...{ 'Content-Type': 'application/x-www-form-urlencoded' }};
-  return querystring.stringify(data);
+  return (new URLSearchParams(data)).toString();
 }
 
 function handleJsonEncoded(reqUrl, config, data) {

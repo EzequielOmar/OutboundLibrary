@@ -1,6 +1,7 @@
 const getRequest = require('./methods/get');
 const postRequest = require('./methods/post');
 
+
 class OB {
     constructor(config = {}) {
         this.defaults = {
