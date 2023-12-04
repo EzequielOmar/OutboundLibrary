@@ -25,8 +25,8 @@ Use the get method to make GET requests:
 const response = await client.get(url, data = {}, config = {});
 ```
 - `url` (string): The URL for the GET request.
-- `data` (object): Query parameters to be included in the request (optional).
-- `config` (object): Additional configuration options (optional).
+- `data?` (object): Query parameters to be included in the request (optional).
+- `config?` (object): Additional configuration options (optional).
 
 ### POST Request
 Use the post method to make POST requests:
@@ -35,7 +35,26 @@ const response = await client.post(url, data, config = {});
 ```
 - `url` (string): The URL for the POST request.
 - `data` (object): The data to be included in the request body.
-- `config` (object): Additional configuration options (optional).
+- `config?` (object): Additional configuration options (optional).
+
+### PUT Request
+Use the put method to make PUT requests:
+```
+const response = await client.put(url, data, config = {});
+```
+- `url` (string): The URL for the POST request.
+- `data` (object): The data to be included in the request body.
+- `config?` (object): Additional configuration options (optional).
+- 
+### PATCH Request
+Use the patch method to make PATCH requests:
+```
+const response = await client.patch(url, data, config = {});
+```
+- `url` (string): The URL for the POST request.
+- `data` (object): The data to be included in the request body.
+- `config?` (object): Additional configuration options (optional).
+
 
 ### Success Response Object
 When a request is successful, the Outbound Library returns a success object with the following properties:
